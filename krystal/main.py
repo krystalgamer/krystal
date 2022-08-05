@@ -44,7 +44,7 @@ class TitleEntry(inline.InlineElement):
 
 class TitleEntryRendererMixin(object):
     def render_title_entry(self, element):
-        return f'<h1>{element.title}</h1>'
+        return f'<h1 id="post-title">{element.title}</h1>'
 
 
 class YoutubeEntry(inline.InlineElement):
@@ -87,8 +87,12 @@ def serve_post(post_id):
         return ''
     marko = Markdown(extensions=[KrystalExt, NewExt, 'codehilite'])
 
-    post = marko.convert(open(f'{post_dir}/{post_id}.md').read())
-    return render_template('post.html', now=now, post=post)
+    parsed = marko.parse(open(f'{post_dir}/{post_id}.md').read())
+    first = parsed_title = parsed.children[0].children[0]
+    parsed_title = first.title
+    parsed_desc = first.description
+    post = marko.render(parsed)
+    return render_template('post.html', now=now, post=post, post_title=parsed_title, post_description=parsed_desc)
 
 @app.route('/')
 def serve_main():
