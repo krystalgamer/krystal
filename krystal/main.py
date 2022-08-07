@@ -71,11 +71,12 @@ class KrystalExt:
 
 class BlogEntry:
 
-    def __init__(self, id, created_timestamp, modified_timestamp, title, url):
+    def __init__(self, id, created_timestamp, modified_timestamp, title, description, url):
         self.id = id
         self.timestamp = created_timestamp
         self.modified_timestamp = modified_timestamp
         self.title = title
+        self.description = description
         self.url = url
 
 def list_entries():
@@ -98,7 +99,7 @@ def list_entries():
         created = datetime(year=year, month=month, day=day)
         year, month, day = tuple(map(lambda x: int(x), first.modified.split('-')))
         modified = datetime(year=year, month=month, day=day)
-        entries.append(BlogEntry(post, created, modified, first.title, my_url_for('serve_post', post_id=post)))
+        entries.append(BlogEntry(post, created, modified, first.title, first.description, my_url_for('serve_post', post_id=post)))
 
 
     entries.sort(key=lambda x: (x.timestamp, x.title), reverse=True)
