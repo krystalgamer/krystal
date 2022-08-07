@@ -3,7 +3,7 @@ from setuptools import setup, find_packages
 
 setup(
         name='krystal',
-        version='1.0.2',
+        version='1.0.3',
         description="Krystal's static website builder",
         author='krystalgamer',
         author_email='krystalgamer@protonmail.com',
