@@ -63,10 +63,12 @@ class YoutubeEntryRendererMixin(object):
 class NewExt:
     elements = [YoutubeEntry]
     renderer_mixins = [YoutubeEntryRendererMixin]
+    parser_mixins = []
 
 class KrystalExt:
     elements = [TitleEntry]
     renderer_mixins = [TitleEntryRendererMixin]
+    parser_mixins = []
 
 
 class BlogEntry:
